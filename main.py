@@ -1,5 +1,6 @@
 import json
 import convert
+import export_file
 import sys
 import os
 
@@ -20,8 +21,10 @@ def main():
         for entry in data['pages']:
             content = entry["lines"]
             title = entry["title"].replace('/', '-')
+            file_name = export_file.create_filename(entry['title'], '.md')
             page = convert.Page(title, content)
-            page.output_to_markdown(output_dir)
+            export_file.export_file(
+                file_name, page.annotated_content, output_dir)
 
 
 if __name__ == '__main__':

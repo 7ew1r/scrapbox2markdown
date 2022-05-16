@@ -1,5 +1,4 @@
 import re
-import os
 
 
 class AnnotatedLine:
@@ -22,7 +21,9 @@ class Page:
                 annotated_lines.append(AnnotatedLine(line, False))
             else:
                 # 直前が "code:~" もしくはコードブロックであり、スペースが1つ以上ある場合
-                if (content[i - 1].startswith('code:') or annotated_lines[i - 1].is_codeblock) and (line.startswith(' ') or line.startswith('\t')):
+                if (content[i - 1].startswith('code:') or
+                    annotated_lines[i - 1].is_codeblock) and \
+                        (line.startswith(' ') or line.startswith('\t')):
                     annotated_lines.append(AnnotatedLine(line, True))
                 else:
                     annotated_lines.append(AnnotatedLine(line, False))
@@ -149,10 +150,3 @@ class Page:
     def convert_content(self):
         converted = self.convert_lines()
         return converted
-
-    def output_to_markdown(self, output_dir):
-        output_file_name = self.title + '.md'
-        output_path = os.path.join(output_dir, output_file_name)
-        with open(output_path, 'w') as f:
-            for Annotated_line in self.annotated_content:
-                f.write(Annotated_line.line + '\n')

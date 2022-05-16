@@ -50,9 +50,11 @@ class FirstTest(unittest.TestCase):
 
     def test_convert_link(self):
         self.assertEqual(Page.convert_link(self,
-                                           '[hoge http://hoge.com]'), '[hoge](http://hoge.com)')
+                                           '[hoge http://hoge.com]'),
+                         '[hoge](http://hoge.com)')
         self.assertEqual(Page.convert_link(self,
-                                           '[https://hoge.com hoge]'), '[hoge](https://hoge.com)')
+                                           '[https://hoge.com hoge]'),
+                         '[hoge](https://hoge.com)')
 
 
 if __name__ == "__main__":
