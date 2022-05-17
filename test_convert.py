@@ -48,6 +48,11 @@ class FirstTest(unittest.TestCase):
         self.assertEqual(Page.convert_image_link(
             self, '[http://hoge.jpg]'), '![](http://hoge.jpg)')
 
+    def test_convert_gyazo_image(self):
+        input = '[https://gyazo.com/hogehoge1234]'
+        expect = '![Image from Gyazo](https://i.gyazo.com/hogehoge1234.png)'
+        self.assertEqual(Page.convert_gyazo_image(self, input), expect)
+
     def test_convert_link(self):
         self.assertEqual(Page.convert_link(self,
                                            '[hoge http://hoge.com]'),

@@ -99,6 +99,11 @@ class Page:
         replace = r'![](\1)'
         return re.sub(pattern, replace, line)
 
+    def convert_gyazo_image(self, line):
+        pattern = r'\[https:\/\/gyazo.com\/(.*)\]'
+        replace = r'![Image from Gyazo](https://i.gyazo.com/\1.png)'
+        return re.sub(pattern, replace, line)
+
     # リンク
     # [hoge http//hoge.com]
     # [http//hoge.com hoge]
@@ -125,6 +130,7 @@ class Page:
     def convert_line(self, line):
         line = self.convert_header(line)
         line = self.convert_image_link(line)
+        line = self.convert_gyazo_image(line)
         line = self.convert_link(line)
         line = self.convert_bold(line)
         line = self.convert_strike_through(line)
